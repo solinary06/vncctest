@@ -1,4 +1,4 @@
-package com.yeahmobi.vncctest;
+package com.yeahmobi.vncctest.dao;
 
 /**
  * Created by steven.liu on 2015/10/27.
@@ -11,9 +11,8 @@ package com.yeahmobi.vncctest;
         import java.io.IOException;
         import java.util.ArrayList;
 
+        import com.yeahmobi.vncctest.util.TransactionUtil;
         import org.apache.hadoop.conf.Configuration;
-        import org.apache.hadoop.hbase.Cell;
-        import org.apache.hadoop.hbase.CellUtil;
         import org.apache.hadoop.hbase.HBaseConfiguration;
         import org.apache.hadoop.hbase.KeyValue;
         import org.apache.hadoop.hbase.client.Delete;
@@ -67,7 +66,7 @@ public class HbaseDAO {
 
 
     public void findByTransactionId(String tableName, String transactionId){
-        String rowKey =TransactionUtil.rowKey(TransactionUtil.unwrap(transactionId));
+        String rowKey = TransactionUtil.rowKey(TransactionUtil.unwrap(transactionId));
         if(!queryRowKey(tableName, rowKey)){
             FileWriter fw;
             try {

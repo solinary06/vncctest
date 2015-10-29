@@ -1,4 +1,4 @@
-package com.yeahmobi.vncctest;
+package com.yeahmobi.vncctest.util;
 
 /**
  * Created by steven.liu on 2015/10/27.
@@ -6,13 +6,10 @@ package com.yeahmobi.vncctest;
 
 import java.math.BigInteger;
 
+import com.yeahmobi.vncctest.util.EncryptKeys;
 import org.apache.commons.lang.StringUtils;
 
 import com.google.common.base.Joiner;
-
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
 
 public class TransactionUtil {
 

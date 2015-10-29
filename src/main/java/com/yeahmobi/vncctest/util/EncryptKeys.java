@@ -1,4 +1,4 @@
-package com.yeahmobi.vncctest;
+package com.yeahmobi.vncctest.util;
 
 /**
  * Created by steven.liu on 2015/10/27.
