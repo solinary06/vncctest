@@ -33,10 +33,10 @@ public class HbaseDAO {
 
 
     static{
-//		config.set("hbase.zookeeper.property.clientPort", "2181");
-//		config.set("hbase.zookeeper.quorum", "slave-72,slave-74,slave-73");
-//		config.set("hbase.security.authentication", "simple");
-//		config.set("hbase.rpc.timeout", "60000");
+		config.set("hbase.zookeeper.property.clientPort", "2181");
+		config.set("hbase.zookeeper.quorum", "vn2-175,cc1-176,cc2-177");
+		config.set("hbase.security.authentication", "simple");
+		config.set("hbase.rpc.timeout", "60000");
     }
 
 
@@ -65,37 +65,30 @@ public class HbaseDAO {
     }
 
 
-    public void findByTransactionId(String tableName, String transactionId){
+    public String findByTransactionId(String tableName, String transactionId){
         String rowKey = TransactionUtil.rowKey(TransactionUtil.unwrap(transactionId));
-        if(!queryRowKey(tableName, rowKey)){
-            FileWriter fw;
-            try {
-                System.out.println("not found!!");
-                fw = new FileWriter(new File("E:\\result.txt"), true);
-                fw.write("Cannot find click id:" + transactionId +"\n");
-                fw.close();
-            } catch (IOException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            }
-
+        String clickInfo = queryRowKey(tableName, rowKey).toString();
+        if(clickInfo.isEmpty()||clickInfo==null){
+            return "transaction id not found";
+        }else{
+            return clickInfo;
         }
     }
 
-    public boolean queryRowKey(String tableName, String rowKey){
+    public StringBuilder queryRowKey(String tableName, String rowKey){
+        StringBuilder sb = new StringBuilder();
         try {
+
             HTable table = new HTable(config, tableName);
 
             Get get1 = new Get(Bytes.toBytes(rowKey));
             Result result = table.get(get1);
 
-
+            sb.append("<br><b>row:</b> "+new String(rowKey));
             for(KeyValue kv:result.raw()){
-                System.out.println("row: "+new String(kv.getRow()));
-                System.out.println("family: "+new String(kv.getFamily()));
-                System.out.println("column: "+new String(kv.getQualifier()));
-                System.out.println("value: "+new String(kv.getValue()));
-
+                sb.append("<br><br><b>family:</b> "+new String(kv.getFamily()));
+                sb.append("  <b>column:</b> "+new String(kv.getQualifier()));
+                sb.append("<br><b>value:</b> "+new String(kv.getValue()));
             }
 
 
@@ -105,7 +98,7 @@ public class HbaseDAO {
             e.printStackTrace();
         }
 
-        return true;
+        return sb;
     }
 
     public boolean queryRowKey(String tableName, String rowKey, ArrayList<String> list){
