@@ -1,6 +1,8 @@
 package com.yeahmobi.vncctest.util;
 
+import com.google.common.base.Function;
 import com.google.common.base.Stopwatch;
+import com.google.common.collect.Collections2;
 import org.apache.http.HttpRequest;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
@@ -166,19 +168,19 @@ public class HttpUtil {
 
             statusCode = response.getStatusLine().getStatusCode();
 //            if (200 == statusCode|| 302 == statusCode) {
-                inStream = response.getEntity().getContent();
-                bReader = new BufferedReader(new InputStreamReader(
-                        inStream));
+            inStream = response.getEntity().getContent();
+            bReader = new BufferedReader(new InputStreamReader(
+                    inStream));
 
-                StringBuilder strBuilder = new StringBuilder();
-                while (true) {
-                    String line = bReader.readLine();
-                    if (null == line) {
-                        break;
-                    }
-                    strBuilder.append(line + "<br>");
+            StringBuilder strBuilder = new StringBuilder();
+            while (true) {
+                String line = bReader.readLine();
+                if (null == line) {
+                    break;
                 }
-                res = strBuilder.toString();
+                strBuilder.append(line + "<br>");
+            }
+            res = strBuilder.toString();
 //            }
 
 
@@ -203,9 +205,30 @@ public class HttpUtil {
     }
 
     public static void main(String[] args) {
-        HttpUtil httpUtil = new HttpUtil();
+//        HttpUtil httpUtil = new HttpUtil();
 //        System.out.println(httpUtil.doGet("http://172.30.10.174:8080/check", null));
-        System.out.println(httpUtil.doRegulationPost("http://api.pre.dy/ymapi/OfferRegulation/updatedOfferInfo", "2015-12-09 00:20:02"));
+//        System.out.println(httpUtil.doRegulationPost("http://api.pre.dy/ymapi/OfferRegulation/updatedOfferInfo", "2015-12-09 00:20:02"));
+
+        final ArrayList<String> list = new ArrayList<String>();
+        Collection<String> stringValues = Arrays.asList("hello", "Guava",
+                "Hello", "java");
+
+        Collection<String> resultValues = Collections2.transform(stringValues, new Function<String, String>() {
+            public String apply(String input) {
+                list.add(input);
+                System.out.print("11111");
+                return input.toUpperCase();
+            }
+        });
+
+        for(String str:list){
+            System.out.println(str);
+        }
+
+        for(String str:resultValues){
+            System.out.println(str);
+        }
+
     }
 
 }
