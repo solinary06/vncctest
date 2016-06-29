@@ -1,4 +1,4 @@
-package com.yeahmobi.vncctest.util;
+package com.yeahmobi.vncctest.encrypt;
 
 /**
  * Created by steven.liu on 2015/10/27.

@@ -1,4 +1,4 @@
-package com.yeahmobi.vncctest.util;
+package com.yeahmobi.vncctest.encrypt;
 
 /**
  * Created by steven.liu on 2015/10/27.
@@ -6,7 +6,7 @@ package com.yeahmobi.vncctest.util;
 
 import java.math.BigInteger;
 
-import com.yeahmobi.vncctest.util.EncryptKeys;
+import com.yeahmobi.vncctest.encrypt.EncryptKeys;
 import org.apache.commons.lang.StringUtils;
 
 import com.google.common.base.Joiner;
