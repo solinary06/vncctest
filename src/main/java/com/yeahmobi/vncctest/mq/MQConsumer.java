@@ -70,27 +70,6 @@ public class MQConsumer {
         }
     }
 
-    public void consumeMessageFromTimestamp(String consumerGroup, String topic, long timestamp, MessageListenerConcurrently listener) {
-        consumer = new DefaultMQPushConsumer(consumerGroup);
-        consumer.setConsumeFromWhere(ConsumeFromWhere.CONSUME_FROM_TIMESTAMP);
-        consumer.setConsumeTimestamp(Long.toString(timestamp));
-
-        try {
-            consumer.subscribe(topic, "*");
-
-            consumer.setMessageModel(MessageModel.CLUSTERING);
-            consumer.registerMessageListener(listener);
-
-            consumer.start();
-
-
-        } catch (MQClientException e) {
-            e.printStackTrace();
-        }
-    }
-
-
-
     public void shutdownConsumer(){
         this.consumer.shutdown();
     }

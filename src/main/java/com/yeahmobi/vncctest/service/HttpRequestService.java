@@ -1,6 +1,11 @@
 package com.yeahmobi.vncctest.service;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.yeahmobi.vncctest.dao.HbaseDAO;
+import com.yeahmobi.vncctest.data.ResponseResutl;
+import com.yeahmobi.vncctest.encrypt.AppTypeEncryptUtil;
+import com.yeahmobi.vncctest.encrypt.AppTypeEnum;
 import com.yeahmobi.vncctest.mq.QueryMessage;
 import com.yeahmobi.vncctest.util.HttpUtil;
 import org.slf4j.Logger;
@@ -13,6 +18,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 
 
@@ -24,6 +31,14 @@ public class HttpRequestService {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(HttpRequestService.class);
     private ModelAndView view;
+    HashMap<String, AppTypeEnum> appTypeMap = new HashMap<String, AppTypeEnum>();
+
+    HttpRequestService(){
+        appTypeMap.put("affiliate", AppTypeEnum.AFF);
+        appTypeMap.put("sdk", AppTypeEnum.SDK);
+        appTypeMap.put("offline", AppTypeEnum.OFF);
+        appTypeMap.put("realtime", AppTypeEnum.REAL);
+    }
 
     @RequestMapping(value = "/http", method = RequestMethod.GET)
     public ModelAndView showHttpView() {
@@ -45,76 +60,108 @@ public class HttpRequestService {
     }
 
     @RequestMapping(value = "/httpClick", method = RequestMethod.POST)
-    public @ResponseBody String doClick(@RequestParam("clickServiceSelect") String server,
-                                @RequestParam("apiSelect") String api,
-                                @RequestParam("offerId") String offer,
-                                @RequestParam("affId") String aff) {
+    public
+    @ResponseBody
+    String doClick(@RequestParam("clickServiceSelect") String server,
+                   @RequestParam("apiSelect") String api,
+                   @RequestParam("offerId") String offer,
+                   @RequestParam("affId") String aff,
+                   @RequestParam("appId") String app,
+                   @RequestParam("type") String type,
+                   @RequestParam("header") String header,
+                   @RequestParam("params") String params) {
         HttpUtil httpUtil = new HttpUtil();
         String url;
-        if(api.equals("click")){
-            url = server + "/trace?offer_id=" + offer +"&aff_id=" +aff;
-        }else if(api.equals("offerInfo")){
-            url = server + "/offerInfo?offer=" + offer +"&aff=" +aff;
-        }else{
+        if (api.equals("click")) {
 
+            if(type.equals("affiliate")){
+                url = server + "/trace?offer_id=" + offer + "&aff_id=" + aff + params;
+            }else{
+                String encodedType = AppTypeEncryptUtil.encode(appTypeMap.get(type),Integer.parseInt(app),Integer.parseInt(offer));
+                url = server + "/trace?offer_id=" + offer + "&app_id=" + app + "&type=" + encodedType +params;
+            }
+        } else if (api.equals("offerInfo")) {
+            url = server + "/offerInfo?offer=" + offer + "&aff=" + aff + "&app=" + app;
+        } else {
             return "wrong API!";
         }
 
-        String message = httpUtil.doGet(url, null);
+        String message = "";
+        if (!header.equals("")) {
+            HashMap headerMap = toHashMap(header);
+            message = httpUtil.doGet(url, headerMap);
+        } else {
+            message = httpUtil.doGet(url, null);
+        }
+
         String clickid = findClickId(message);
+        ResponseResutl response = new ResponseResutl();
         if (!clickid.equals("")) {
             message = "Click succeed and transaction id is " + clickid;
-
+            response.setResult("success");
+        } else if(api.equals("offerInfo")){
+            response.setResult("success");
+        } else {
+            response.setResult("fail");
         }
+        response.setData(message);
+        String json =  JSON.toJSONString(response);
+
+        return json;
+    }
+
+    @RequestMapping(value = "/httpConv", method = RequestMethod.POST)
+    public
+    @ResponseBody
+    String doConversion(@RequestParam("convServiceSelect") String server,
+                        @RequestParam("transactionId") String transactionId,
+                        @RequestParam("header") String header,
+                        @RequestParam("params") String params
+    ) {
+        HttpUtil httpUtil = new HttpUtil();
+        String url = server + "/conv?transaction_id=" + transactionId + params;
+
+        String message = "";
+        if (!header.equals("")) {
+            HashMap headerMap = toHashMap(header);
+            message = httpUtil.doGet(url, headerMap);
+        } else {
+            message = httpUtil.doGet(url, null);
+        }
+
         return message;
     }
 
-    @RequestMapping(value = "/httpConv", method = RequestMethod.GET)
-    public ModelAndView doConversion(@RequestParam("convServiceSelect") String server,
-                                @RequestParam("transactionId") String transactionId) {
-        HttpUtil httpUtil = new HttpUtil();
-        ModelAndView view = new ModelAndView("httpRequest");
-        String url = server + "/conv?transaction_id=" + transactionId;
-
-        String message = httpUtil.doGet(url, null);
-        view.addObject("transId", "" + transactionId);
-        view.addObject("msg", "" + message);
-        return view;
-    }
-
-    @RequestMapping(value = "/queryMessage", method = RequestMethod.GET)
-         public ModelAndView queryMessage(@RequestParam("messageTagSelect") String tag, @RequestParam("messageKey") String key) {
+    @RequestMapping(value = "/queryMessage", method = RequestMethod.POST)
+    public @ResponseBody String queryMessage(@RequestParam("messageTagSelect") String tag,
+                                             @RequestParam("messageKey") String key) {
         QueryMessage queryMessage = new QueryMessage();
-        ModelAndView view = new ModelAndView("httpRequest");
 
-        String message = queryMessage.queryMessageByKey("T_YMREDIRECTOR_QUEUE_COLLECTOR_"+tag,key);
+        String message = queryMessage.queryMessageByKey("T_YMREDIRECTOR_QUEUE_DRUID_" + tag.toUpperCase(), key);
 
-        view.addObject("transId", "" + key);
-        view.addObject("msg", "" + message);
-        return view;
+        return message;
     }
 
-    @RequestMapping(value = "/queryTransIdInHbase", method = RequestMethod.GET)
-    public ModelAndView queryTransIdInHbase(@RequestParam("hbaseTransId") String id) {
+    @RequestMapping(value = "/queryTransIdInHbase", method = RequestMethod.POST)
+    public @ResponseBody String queryTransIdInHbase(@RequestParam("hbaseTransId") String id) {
         HbaseDAO hbaseDAO = new HbaseDAO();
-        ModelAndView view = new ModelAndView("httpRequest");
 
-        String message = hbaseDAO.findByTransactionId("clicklog",id);
+        String message = hbaseDAO.findByTransactionId("clicklog", id);
 
-        view.addObject("transId", "" + id);
-        view.addObject("msg", "" + message);
-        return view;
+        return message;
     }
 
     @RequestMapping(value = "/doRegulation", method = RequestMethod.POST)
-    public @ResponseBody String doRegulation(@RequestParam("server") String server,
-                                        @RequestParam("type") String type,
-                                        @RequestParam("time") String time) {
+    public
+    @ResponseBody
+    String doRegulation(@RequestParam("server") String server,
+                        @RequestParam("type") String type,
+                        @RequestParam("time") String time) {
         HttpUtil httpUtil = new HttpUtil();
         String url = server + "/ymapi/OfferRegulation/" + type;
 
-        if(time.equals("")){
-            time=null;
+        if (time.equals("")) {
+            time = null;
         }
         String message = httpUtil.doRegulationPost(url, time);
         return message;
@@ -133,5 +180,19 @@ public class HttpRequestService {
             }
         }
         return "";
+    }
+
+    private static HashMap<String, String> toHashMap(String str) {
+        HashMap<String, String> data = new HashMap<String, String>();
+        // 将json字符串转换成jsonObject
+        JSONObject jsonObject = JSONObject.parseObject(str);
+        Iterator it = jsonObject.keySet().iterator();
+        // 遍历jsonObject数据，添加到Map对象
+        while (it.hasNext()) {
+            String key = String.valueOf(it.next());
+            String value = (String) jsonObject.get(key);
+            data.put(key, value);
+        }
+        return data;
     }
 }

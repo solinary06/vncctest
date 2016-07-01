@@ -1,18 +1,14 @@
 package com.yeahmobi.vncctest.service;
 
 import com.yeahmobi.vncctest.dao.HbaseDAO;
-import com.yeahmobi.vncctest.util.TransactionUtil;
+import com.yeahmobi.vncctest.encrypt.TransactionUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-
-import javax.ws.rs.FormParam;
-import javax.ws.rs.QueryParam;
 
 /**
  * Created by steven.liu on 2015/10/28.

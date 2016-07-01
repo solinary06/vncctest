@@ -10,11 +10,65 @@
     <!--<mvc:resources mapping="/webjars/**" location="/classpath:/META-INF/resources/webjars/"/>-->
     <context:component-scan base-package="com.yeahmobi.vncctest.service"/>
 
+    <!-- 获取数据源 -->
+    <bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource">
+        <property name="driverClassName">
+            <!--<value>com.mysql.jdbc.Driver</value>-->
+            <value>org.h2.Driver</value>
+        </property>
+        <property name="url">
+            <!--<value>jdbc:mysql://localhost:3306/vncctest</value>-->
+            <value>jdbc:h2:E:\workspace\vncctest\db\test</value>
+        </property>
+        <property name="username">
+            <value>root</value>
+        </property>
+    </bean>
+
+    <!-- 给jdbc模板注入数据源-->
+    <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+        <property name="dataSource" ref="dataSource"></property>
+    </bean>
+    <!-- 给userDao注入模板-->
+    <bean id="userDao" class="com.yeahmobi.vncctest.dao.UserDaoImpl">
+        <property name="jdbcTemplate" ref="jdbcTemplate"></property>
+    </bean>
+
+    <bean id="initialization" class="com.yeahmobi.vncctest.util.Initialization"/>
+
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 
         <property name="prefix" value="/WEB-INF/pages/"/>
         <property name="suffix" value=".jsp"/>
 
+    </bean>
+
+    <bean id="redisDao" class="com.yeahmobi.vncctest.dao.RedisDao">
+        <property name="redisHostMap">
+            <map>
+                <entry key="qa" value="172.30.10.174" />
+                <entry key="dev" value="172.30.10.146"/>
+                <entry key="ali" value="10.7.0.2"/>
+            </map>
+        </property>
+
+        <property name="redisPortMap">
+            <map>
+                <entry key="qa" value="6379" />
+                <entry key="dev" value="6379" />
+                <entry key="ali" value="9006"/>
+            </map>
+        </property>
+
+        <property name="dataNamespaceMap">
+            <map>
+                <entry key="offer" value="o" />
+                <entry key="affiliate" value="a"/>
+                <entry key="personalizedOffer" value="po"/>
+                <entry key="app" value="ap"/>
+                <entry key="appOffer" value="ao"/>
+            </map>
+        </property>
     </bean>
 
 </beans>

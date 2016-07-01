@@ -41,6 +41,7 @@ public class QueryMessage {
             message = this.queryByKey(defaultMQAdminExt, topic, key);
         } catch (Exception var10) {
             var10.printStackTrace();
+            message = "Message Not found!";
         } finally {
             defaultMQAdminExt.shutdown();
         }

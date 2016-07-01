@@ -6,12 +6,10 @@ package com.yeahmobi.vncctest.dao;
 
 
 
-        import java.io.File;
-        import java.io.FileWriter;
         import java.io.IOException;
         import java.util.ArrayList;
 
-        import com.yeahmobi.vncctest.util.TransactionUtil;
+        import com.yeahmobi.vncctest.encrypt.TransactionUtil;
         import org.apache.hadoop.conf.Configuration;
         import org.apache.hadoop.hbase.HBaseConfiguration;
         import org.apache.hadoop.hbase.KeyValue;

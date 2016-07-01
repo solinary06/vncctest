@@ -4,8 +4,11 @@ package com.yeahmobi.vncctest.encrypt;
  * Created by steven.liu on 2015/10/27.
  */
 public class EncryptKeys {
+    static int SECRET_SELECTION_SEED = 64;
+
     static final byte crcKey = (byte) 91;  //8 bit
     static final byte[][] wrapKey = new byte[64][]; // 240bit
+
 
 
     static {
