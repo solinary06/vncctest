@@ -97,6 +97,32 @@
           <element id="library" level="project" name="Maven: io.netty:netty-all:4.0.28.Final" />
           <element id="library" level="project" name="Maven: org.webjars:jquery:2.1.4" />
           <element id="library" level="project" name="Maven: org.webjars:bootstrap:3.1.0" />
+          <element id="library" level="project" name="Maven: org.eclipse.jetty:jetty-util:9.2.14.v20151106" />
+          <element id="library" level="project" name="Maven: javax.servlet.jsp:javax.servlet.jsp-api:2.3.1" />
+          <element id="library" level="project" name="Maven: javax.servlet:javax.servlet-api:3.1.0" />
+          <element id="library" level="project" name="Maven: mysql:mysql-connector-java:5.1.38" />
+          <element id="library" level="project" name="Maven: org.apache.commons:commons-dbcp2:2.1.1" />
+          <element id="library" level="project" name="Maven: org.apache.commons:commons-math3:3.4.1" />
+          <element id="library" level="project" name="Maven: org.apache.commons:commons-pool2:2.4.2" />
+          <element id="library" level="project" name="Maven: org.eclipse.jetty.orbit:javax.servlet.jsp.jstl:1.2.0.v201105211821" />
+          <element id="library" level="project" name="Maven: org.eclipse.jetty.orbit:org.eclipse.jdt.core:3.8.2.v20130121" />
+          <element id="library" level="project" name="Maven: org.eclipse.jetty.toolchain:jetty-schemas:3.1.M0" />
+          <element id="library" level="project" name="Maven: org.eclipse.jetty:jetty-http:9.2.14.v20151106" />
+          <element id="library" level="project" name="Maven: org.eclipse.jetty:jetty-io:9.2.14.v20151106" />
+          <element id="library" level="project" name="Maven: org.eclipse.jetty:jetty-jsp:9.2.14.v20151106" />
+          <element id="library" level="project" name="Maven: org.eclipse.jetty:jetty-security:9.2.14.v20151106" />
+          <element id="library" level="project" name="Maven: org.eclipse.jetty:jetty-server:9.2.14.v20151106" />
+          <element id="library" level="project" name="Maven: org.eclipse.jetty:jetty-servlet:9.2.14.v20151106" />
+          <element id="library" level="project" name="Maven: org.eclipse.jetty:jetty-webapp:9.2.14.v20151106" />
+          <element id="library" level="project" name="Maven: org.eclipse.jetty:jetty-xml:9.2.14.v20151106" />
+          <element id="library" level="project" name="Maven: org.glassfish.web:javax.servlet.jsp.jstl:1.2.2" />
+          <element id="library" level="project" name="Maven: org.glassfish.web:javax.servlet.jsp:2.3.2" />
+          <element id="library" level="project" name="Maven: org.glassfish:javax.el:3.0.0" />
+          <element id="library" level="project" name="Maven: org.springframework:spring-jdbc:3.2.3.RELEASE" />
+          <element id="library" level="project" name="Maven: org.springframework:spring-tx:3.2.3.RELEASE" />
+          <element id="library" level="project" name="Maven: com.h2database:h2:1.4.191" />
+          <element id="library" level="project" name="Maven: redis.clients:jedis:2.7.2" />
+          <element id="library" level="project" name="Maven: com.yeahmobi.integrationTest:integration-test:1.0-SNAPSHOT" />
         </element>
       </element>
     </root>

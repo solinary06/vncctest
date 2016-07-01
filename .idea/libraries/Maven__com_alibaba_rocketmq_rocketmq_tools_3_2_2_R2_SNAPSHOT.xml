@@ -1,13 +1,13 @@
 <component name="libraryTable">
   <library name="Maven: com.alibaba.rocketmq:rocketmq-tools:3.2.2.R2-SNAPSHOT">
     <CLASSES>
-      <root url="jar://$MAVEN_REPOSITORY$/com/alibaba/rocketmq/rocketmq-tools/3.2.2.R2-SNAPSHOT/rocketmq-tools-3.2.2.R2-20150929.023651-18.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/com/alibaba/rocketmq/rocketmq-tools/3.2.2.R2-SNAPSHOT/rocketmq-tools-3.2.2.R2-SNAPSHOT.jar!/" />
     </CLASSES>
     <JAVADOC>
-      <root url="jar://$MAVEN_REPOSITORY$/com/alibaba/rocketmq/rocketmq-tools/3.2.2.R2-SNAPSHOT/rocketmq-tools-3.2.2.R2-20150929.023651-18-javadoc.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/com/alibaba/rocketmq/rocketmq-tools/3.2.2.R2-SNAPSHOT/rocketmq-tools-3.2.2.R2-SNAPSHOT-javadoc.jar!/" />
     </JAVADOC>
     <SOURCES>
-      <root url="jar://$MAVEN_REPOSITORY$/com/alibaba/rocketmq/rocketmq-tools/3.2.2.R2-SNAPSHOT/rocketmq-tools-3.2.2.R2-20150929.023651-18-sources.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/com/alibaba/rocketmq/rocketmq-tools/3.2.2.R2-SNAPSHOT/rocketmq-tools-3.2.2.R2-SNAPSHOT-sources.jar!/" />
     </SOURCES>
   </library>
 </component>

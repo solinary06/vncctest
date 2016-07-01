@@ -1,13 +1,13 @@
 <component name="libraryTable">
   <library name="Maven: com.alibaba.rocketmq:rocketmq-remoting:3.2.2.R2-SNAPSHOT">
     <CLASSES>
-      <root url="jar://$MAVEN_REPOSITORY$/com/alibaba/rocketmq/rocketmq-remoting/3.2.2.R2-SNAPSHOT/rocketmq-remoting-3.2.2.R2-20150929.023642-18.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/com/alibaba/rocketmq/rocketmq-remoting/3.2.2.R2-SNAPSHOT/rocketmq-remoting-3.2.2.R2-20160519.091233-1.jar!/" />
     </CLASSES>
     <JAVADOC>
-      <root url="jar://$MAVEN_REPOSITORY$/com/alibaba/rocketmq/rocketmq-remoting/3.2.2.R2-SNAPSHOT/rocketmq-remoting-3.2.2.R2-20150929.023642-18-javadoc.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/com/alibaba/rocketmq/rocketmq-remoting/3.2.2.R2-SNAPSHOT/rocketmq-remoting-3.2.2.R2-20160519.091233-1-javadoc.jar!/" />
     </JAVADOC>
     <SOURCES>
-      <root url="jar://$MAVEN_REPOSITORY$/com/alibaba/rocketmq/rocketmq-remoting/3.2.2.R2-SNAPSHOT/rocketmq-remoting-3.2.2.R2-20150929.023642-18-sources.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/com/alibaba/rocketmq/rocketmq-remoting/3.2.2.R2-SNAPSHOT/rocketmq-remoting-3.2.2.R2-20160519.091233-1-sources.jar!/" />
     </SOURCES>
   </library>
 </component>
