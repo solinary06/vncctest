@@ -3,10 +3,10 @@ package com.yeahmobi.vncctest.data;
 /**
  * Created by steven.liu on 2016/6/23.
  */
-public class ResponseResutl {
+public class ResponseResult<T> {
 
     public String result;
-    public String data;
+    public T data;
 
     public String getResult() {
         return result;
@@ -16,11 +16,11 @@ public class ResponseResutl {
         this.result = result;
     }
 
-    public String getData() {
+    public T getData() {
         return data;
     }
 
-    public void setData(String data) {
+    public void setData(T data) {
         this.data = data;
     }
 }

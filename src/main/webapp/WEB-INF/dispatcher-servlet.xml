@@ -4,11 +4,13 @@
        xmlns:context="http://www.springframework.org/schema/context"
        xmlns:p="http://www.springframework.org/schema/p"
        xmlns:mvc="http://www.springframework.org/schema/mvc"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+       xmlns:websocket="http://www.springframework.org/schema/websocket"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/websocket http://www.springframework.org/schema/websocket/spring-websocket.xsd">
 
     <!--<mvc:resources location="/WEB-INF/js/" mapping="/js/**"/>-->
     <!--<mvc:resources mapping="/webjars/**" location="/classpath:/META-INF/resources/webjars/"/>-->
     <context:component-scan base-package="com.yeahmobi.vncctest.service"/>
+    <context:component-scan base-package="com.yeahmobi.vncctest.websocket" />
 
     <!-- 获取数据源 -->
     <bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource">
@@ -71,4 +73,13 @@
         </property>
     </bean>
 
+    <bean id="webSocketHandlerImpl" class="com.yeahmobi.vncctest.websocket.WebSocketHandlerImpl"/>
+
+
+    <!--<websocket:handlers>-->
+        <!--<websocket:mapping path="/verify" handler="webSocketHandlerImpl"/>-->
+        <!--<websocket:handshake-interceptors>-->
+            <!--<bean class="com.yeahmobi.vncctest.websocket.HandShakeInterceptorImpl"/>-->
+        <!--</websocket:handshake-interceptors>-->
+    <!--</websocket:handlers>-->
 </beans>

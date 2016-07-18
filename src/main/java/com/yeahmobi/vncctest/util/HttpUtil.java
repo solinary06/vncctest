@@ -178,7 +178,7 @@ public class HttpUtil {
                 if (null == line) {
                     break;
                 }
-                strBuilder.append(line + "<br>");
+                strBuilder.append(line);
             }
             res = strBuilder.toString();
 //            }
@@ -186,6 +186,7 @@ public class HttpUtil {
 
         } catch (Exception e) {
             LOGGER.error(url, e);
+            e.printStackTrace();
         } finally {
             try {
                 if (null != bReader) {

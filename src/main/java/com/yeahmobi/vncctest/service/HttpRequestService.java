@@ -3,7 +3,7 @@ package com.yeahmobi.vncctest.service;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.yeahmobi.vncctest.dao.HbaseDAO;
-import com.yeahmobi.vncctest.data.ResponseResutl;
+import com.yeahmobi.vncctest.data.ResponseResult;
 import com.yeahmobi.vncctest.encrypt.AppTypeEncryptUtil;
 import com.yeahmobi.vncctest.encrypt.AppTypeEnum;
 import com.yeahmobi.vncctest.mq.QueryMessage;
@@ -11,7 +11,6 @@ import com.yeahmobi.vncctest.util.HttpUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -20,7 +19,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.Map;
 
 
 /**
@@ -95,7 +93,7 @@ public class HttpRequestService {
         }
 
         String clickid = findClickId(message);
-        ResponseResutl response = new ResponseResutl();
+        ResponseResult response = new ResponseResult();
         if (!clickid.equals("")) {
             message = "Click succeed and transaction id is " + clickid;
             response.setResult("success");
