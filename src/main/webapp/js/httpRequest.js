@@ -77,6 +77,7 @@ function doConversion() {
     var transactionId = document.getElementById("transactionId").value;
     var headerJson = "";
     var params = "";
+    var api = document.getElementById("convApiSelect").value;
 
     var headerKeys = document.getElementsByName("header_key_conversion");
     var headerValues = document.getElementsByName("header_value_conversion");
@@ -110,7 +111,8 @@ function doConversion() {
             "convServiceSelect": server,
             "transactionId": transactionId,
             "header": headerJson,
-            "params": params
+            "params": params,
+            "api":api
         },
         url: "/httpConv",
         dataType: "text",

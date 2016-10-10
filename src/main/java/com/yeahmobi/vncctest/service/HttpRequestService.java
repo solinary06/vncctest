@@ -114,10 +114,11 @@ public class HttpRequestService {
     String doConversion(@RequestParam("convServiceSelect") String server,
                         @RequestParam("transactionId") String transactionId,
                         @RequestParam("header") String header,
-                        @RequestParam("params") String params
+                        @RequestParam("params") String params,
+                        @RequestParam("api") String api
     ) {
         HttpUtil httpUtil = new HttpUtil();
-        String url = server + "/conv?transaction_id=" + transactionId + params;
+        String url = server + "/" + api + "?transaction_id=" + transactionId + params;
 
         String message = "";
         if (!header.equals("")) {

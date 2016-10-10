@@ -132,8 +132,14 @@
             <option value="http://10.7.0.8:9076">http://10.7.0.8:9076</option>
         </select>
 
+        <label for="convApiSelect">api:</label>
+            <select class="form-control" name="apiSelect" id="convApiSelect" style="width:100px;margin:-2px;">
+                <option value="conv">conv</option>
+                <option value="mconv">mconv</option>
+            </select>
+
         <label for="transactionId">Transaction id:</label>
-        <input class="form-control" id="transactionId" name="transactionId" type="text" size=65>
+        <input class="form-control" id="transactionId" name="transactionId" type="text" size=55>
         <button class="btn btn-default" value="Submit" onclick="doConversion()">Submit</button>
 
         <div class="container" id="param_conversion" style="margin-top: 5px"></div>
