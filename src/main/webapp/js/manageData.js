@@ -163,10 +163,15 @@ function addInputField(fields, area, tag) {
         document.getElementById(area).appendChild(paramLabel);
         document.getElementById(area).appendChild(paramInput);
     }
-    var additionalParameter = document.createElement("div");
-    additionalParameter.setAttribute("id", "additionalParameter");
 
+    var additionalParameter = document.createElement("div");
+    if(tag == "create"){
+        additionalParameter.setAttribute("id", "additionalParameter");
+    }else if(tag == "update"){
+        additionalParameter.setAttribute("id", "updateParameter");
+    }
     document.getElementById(area).appendChild(additionalParameter);
+
 }
 
 function addDataParam(area, tag) {

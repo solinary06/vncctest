@@ -136,6 +136,7 @@
             <select class="form-control" name="apiSelect" id="convApiSelect" style="width:100px;margin:-2px;">
                 <option value="conv">conv</option>
                 <option value="mconv">mconv</option>
+                <option value="event">event</option>
             </select>
 
         <label for="transactionId">Transaction id:</label>

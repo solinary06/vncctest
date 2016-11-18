@@ -7,7 +7,7 @@ import java.util.List;
 import com.yeahmobi.vncctest.model.User;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
-import org.springframework.jdbc.core.simple.ParameterizedBeanPropertyRowMapper;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 
 /**
  * Created by steven.liu on 2016/4/15.
@@ -43,13 +43,13 @@ public class UserDaoImpl implements UserDao{
 
     public User select(int id) {
         String sql="select * from user where id=?";
-        return jdbcTemplate.queryForObject(sql, ParameterizedBeanPropertyRowMapper.newInstance(User.class),id);
+        return jdbcTemplate.queryForObject(sql, BeanPropertyRowMapper.newInstance(User.class),id);
     }
 
     public User selectByName(String name,String password){
         String sql="select * from user where name=? and password=?";
         try{
-            return jdbcTemplate.queryForObject(sql, ParameterizedBeanPropertyRowMapper.newInstance(User.class),name,password);
+            return jdbcTemplate.queryForObject(sql, BeanPropertyRowMapper.newInstance(User.class),name,password);
         }catch(Exception e){
             return null;
         }

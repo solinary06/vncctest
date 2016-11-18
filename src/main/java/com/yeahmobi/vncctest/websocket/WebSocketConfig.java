@@ -14,7 +14,7 @@ package com.yeahmobi.vncctest.websocket;
 @EnableWebSocket//开启websocket
 public class WebSocketConfig implements WebSocketConfigurer {
     public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
-        registry.addHandler(new WebSocketHandlerImpl(),"/verify").addInterceptors(new HandShakeInterceptorImpl()).setAllowedOrigins("*");; //支持websocket 的访问链接
+        registry.addHandler(new WebSocketHandlerImpl(),"/verify").addInterceptors(new HandShakeInterceptorImpl()).setAllowedOrigins("*"); //支持websocket 的访问链接
         registry.addHandler(new WebSocketHandlerImpl(), "/sockjs/verify").addInterceptors(new HandShakeInterceptorImpl()).setAllowedOrigins("*").withSockJS(); //不支持websocket的访问链接
     }
 }

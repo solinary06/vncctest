@@ -3,7 +3,28 @@
 <log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/"
 	debug="true">
 
-	<appender name="stout" class="org.apache.log4j.ConsoleAppender">
+	<!--<appender name="stout" class="org.apache.log4j.ConsoleAppender">-->
+		<!--<layout class="org.apache.log4j.PatternLayout">-->
+			<!--<param name="ConversionPattern" value="[%-5p] [%d] %c:%L - %m%n" />-->
+		<!--</layout>-->
+		<!--<filter class="org.apache.log4j.varia.LevelMatchFilter">-->
+			<!--<param name="LevelToMatch" value="info" />-->
+			<!--<param name="AcceptOnMatch" value="true" />-->
+		<!--</filter>-->
+		<!--<filter class="org.apache.log4j.varia.DenyAllFilter" />-->
+	<!--</appender>-->
+
+	<!--<appender name="VN-ERROR" class="org.apache.log4j.ConsoleAppender">-->
+		<!--<param name="Threshold" value="error" />-->
+		<!--<layout class="org.apache.log4j.PatternLayout">-->
+			<!--<param name="ConversionPattern" value="[%-5p] [%d] %c:%L - %m%n" />-->
+		<!--</layout>-->
+	<!--</appender>-->
+
+	<appender name="TEST-INFO" class="org.apache.log4j.RollingFileAppender">
+		<param name="File" value="/dianyi/log/vncctest/vncctest.log" />
+		<param name="MaxBackupIndex" value="10" />
+		<!--<param name="MaxFileSize" value="1024" />-->
 		<layout class="org.apache.log4j.PatternLayout">
 			<param name="ConversionPattern" value="[%-5p] [%d] %c:%L - %m%n" />
 		</layout>
@@ -14,8 +35,10 @@
 		<filter class="org.apache.log4j.varia.DenyAllFilter" />
 	</appender>
 
-	<appender name="VN-ERROR" class="org.apache.log4j.ConsoleAppender">
-		<param name="Threshold" value="error" />
+	<appender name="TEST-ERROR" class="org.apache.log4j.RollingFileAppender">
+		<param name="File" value="/dianyi/log/vncctest/vncctest.log.error" />
+		<param name="MaxBackupIndex" value="10" />
+		<param name="Threshold" value="warn" />
 		<layout class="org.apache.log4j.PatternLayout">
 			<param name="ConversionPattern" value="[%-5p] [%d] %c:%L - %m%n" />
 		</layout>
@@ -24,7 +47,8 @@
 
 	<root>
 		<level value="info" />
-		<appender-ref ref="stout" />
+		<appender-ref ref="TEST-INFO" />
+		<appender-ref ref="TEST-ERROR" />
 	</root>
 
 </log4j:configuration>

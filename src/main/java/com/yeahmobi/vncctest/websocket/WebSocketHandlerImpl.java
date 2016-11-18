@@ -68,6 +68,8 @@ public class WebSocketHandlerImpl implements WebSocketHandler {
             wait(3);
             String druidResult = onlineVerifyService.queryDruidData(transactionId);
 
+            logger.info("click query result: " + druidResult);
+
             if(druidResult.contains("1,0")){
                 data.setPhase("click");
                 data.setStatus("complete");
@@ -96,6 +98,7 @@ public class WebSocketHandlerImpl implements WebSocketHandler {
 
                 druidResult = onlineVerifyService.queryDruidData(transactionId);
 
+                logger.info("conversion query result: " + druidResult);
 
                 if(druidResult.contains("1,1")){
                     data.setPhase("conversion");
